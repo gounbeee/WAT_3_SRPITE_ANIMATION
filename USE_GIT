@@ -1,0 +1,221 @@
+USE_GITINFOLINK
+
+// --------------------------EMSCRIPTEN------------------------------
+
+// < COMPILING WITHOUT GLUE CODE USING EMSCRIPTEN >
+
+You can use emscripten to generate fairly minimal code output.
+
+Consider the following trivial file adder.c:
+
+int adder (int a, int b) {
+    return a + b;
+}
+Compile it like this (requires a fairly recent emscripten):
+
+
+emcc -O2 -s WASM=1 -s SIDE_MODULE=1 -o adder.wasm
+
+
+
+
+
+
+// < BINARYEN >
+/Volumes/ROOT/ROOT/emsdk/upstream/emscripten/emcc: line 36: /Volumes/ROOT/ROOT/emsdk/python/3.9.2_64bit/bin/python3: Bad CPU type in executable
+/Volumes/ROOT/ROOT/emsdk/upstream/emscripten/emcc: line 36: /Volumes/ROOT/ROOT/emsdk/python/3.9.2_64bit/bin/python3: Undefined error: 0
+siyoungchoi@odada-iMac2 WASM_4_BASIC_EMCC_SDL % brew install binaryen
+
+
+
+
+
+
+
+
+// --------------------------LLVM------------------------------
+
+// < Compiling C to WebAssembly without Emscripten >
+https://surma.dev/things/c-to-webassembly/
+https://surma.dev/things/raw-wasm/
+
+
+// < error: unknown target triple 'xxx', please use ....... >
+https://github.com/WebAssembly/wasi-sdk/issues/172
+
+
+If you need to have llvm first in your PATH, run:
+  echo 'export PATH="/opt/homebrew/opt/llvm/bin:$PATH"' >> ~/.zshrc
+
+For compilers to find llvm you may need to set:
+  export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+  export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
+
+
+
+
+
+
+
+
+
+
+// ABOUT GIT
+// < Error: Permission denied (publickey) >
+https://yoshiyoshifujii.hatenablog.com/entry/2014/08/12/230144
+
+
+
+
+1. SSHキーを作成
+以下のコマンドを実行して作成する。
+
+$ cd ~/.ssh
+$ ssh-keygen
+  Generating public/private rsa key pair.
+  Enter file in which to save the key (/Users/xxx/.ssh/id_rsa): id_rsa_github
+  Enter passphrase (empty for no passphrase):
+  Enter same passphrase again:
+  Your identification has been saved in id_rsa_github.
+  Your public key has been saved in id_rsa_github.pub.
+  ...
+冒頭に述べたとおり、 ~/.ssh/id_rsaに出力したくないので、~/.sshディレクトリに移動してから、id_rsa_githubって名前を指定してる。
+
+これで~/.sshディレクトリ直下に、
+
+id_rsa_github
+id_rsa_github.pub
+のファイルができているはず。
+
+
+
+
+2. GitHubにSSHキーを登録
+次に、id_rsa_github.pubの中身をGitHubに登録するのだが、、、
+
+このあたりは、GitHubなり、他サイトなりを参照いただきたく、省略させていただきます。
+
+※一応、公式のリンクを貼っときます
+Generating SSH Keys · GitHub Help
+
+
+
+
+3. ~/.ssh/configに追加
+Vimなりで、以下のファイルを開いて追記する。
+
+$ vim ~/.ssh/config
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile "/Users/xxx/.ssh/id_rsa_github"
+ここでハマりポイント1の登場。
+
+Host github.com
+のところは、4の手順で実施する、 git://github.com/... のgithub.comとそろえないと認識されないから注意。
+
+つまり、
+
+Host github.com.hogehoge
+とかして、 git://github.com.hogehoge/... ってしても良い。
+
+hogehogeのところを目的に応じて変更するとかで、管理できたりするだろう。
+
+
+
+
+
+
+
++++
+// SWITCHING 
+// ERROR :::  src refspec master does not match any
+https://www.freecodecamp.org/news/error-src-refspec-master-does-not-match-any-how-to-fix-in-git/
+
+$ git checkout -b master
+
+
+
+
+
+
+
+
+
+
+4. git remote originの設定変更
+ハマりポイント2の登場。
+
+HTTPSでcloneしてるので、以下のコマンドを実行して、SSHでremote接続するように変更する。
+
+$ git remote -v
+  origin  https://github.com/USERNAME/REPOSITORY.git (fetch)
+  origin  https://github.com/USERNAME/REPOSITORY.git (push)
+で、remoteがHTTPSになってることを確認して、
+
+$ git remote set-url origin git@github.com:USERNAME/REPOSITORY.git
+って実行してやると、OK。
+
+
+
+
+++++
+
+// < ERROR ::  permission-denied-publickey >
+// https://docs.github.com/en/authentication/troubleshooting-ssh/error-permission-denied-publickey
+
+ssh -T git@github.com
+
+eval "$(ssh-agent -s)"
+
+ssh-add ~/.ssh/id_rsa_github
+
+
+git remote set-url origin git@github.com:gounbeee/WASM_4_RAMAMA.git
+
+
+
+
+
+
+
+
+ssh-add ~/.ssh/id_rsa_github
+git remote add origin git@github.com/gounbeee/WASM_4_RAMAMA.git
+
+
+
+**********************************
+**********************************
+
+
+BELOW IS CRITICAL !!!!
+git remote set-url origin git@github.com:gounbeee/WASM_4_RAMAMA.git
+
+
+
+
+
+
+5. git push
+git push origin master
+って実行するとうまいこといけるはず!!
+
+
+
+
+
+git log --oneline --graph --all
+git status
+
+https://qiita.com/yyy752/items/414d890c8d0cc96c6ede
+
+https://www.freecodecamp.org/news/error-failed-to-push-some-refs-to-how-to-fix-in-git/#:~:text=This%20error%20mainly%20occurs%20when,before%20pushing%20your%20own%20changes.
+
+
+
+
+
+
+
+

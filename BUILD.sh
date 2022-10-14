@@ -1,0 +1,1 @@
+wat2wasm imageViewer.wat -o imageViewer.wasm
