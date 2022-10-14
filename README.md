@@ -1,6 +1,8 @@
 <h1>WAT_3_SPRITE_ANIMATION</h1>
 <h3>by Gounbeee 2022</h3>
 
+![image](https://user-images.githubusercontent.com/14824067/195845702-37b03061-08f4-4d58-938a-32fb58235694.gif)
+
 <p>
 THIS SAMPLE REPRSENTS SPRITE ANIMATION USING WAT (WEBASSEMBLY).
 
