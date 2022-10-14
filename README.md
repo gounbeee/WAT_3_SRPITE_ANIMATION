@@ -1,6 +1,8 @@
 <h1>WAT_3_SPRITE_ANIMATION</h1>
 <h3>by Gounbeee 2022</h3>
 
+![image2](https://user-images.githubusercontent.com/14824067/195944506-dee1852b-82be-401e-a238-0042c39ad1a8.png)
+
 ![image](https://user-images.githubusercontent.com/14824067/195845702-37b03061-08f4-4d58-938a-32fb58235694.gif)
 
 <p>
