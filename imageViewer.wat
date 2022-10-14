@@ -15,34 +15,6 @@
   (type (;1;) (func (param i32 i32 i32 i32 i32 i32 i32 i32) ) )
  
 
-  ;; ---------------------------------------------------------------------------------------
-  ;; FUNCTION DEFINITION
-  ;; THIS FUNCTION CAN TAKE 'FUNCTION', AND DO SOMETHING (type SECTION ABOVE)
-  ;; BUT THIS TYPE OF FUNCTION DOES NOT TAKE PARAMETER, THEN RETURN NOTHING !  <-  (func)
-
-
-  ;; ---------------------------------------------------------------------------------------
-  ;; < FUNCTION DEFINITION >
-  ;;
-  ;; IN C, DEFINITION IS BELOW !
-  ;;
-  ;;         int sumArrayInt32 (int *array, int length) {
-  ;;         ~~~                ~~~~~~~~~~~~~~~~~~~~~~
-  ;;          |                           |
-  ;;          --------------------------> | -----------
-  ;;                                      |           |
-  ;;                                      |           |
-  ;; The  of a function declares its signature by reference 
-  ;; to a type defined in the module.     |           |
-  ;;      ~~~~~~~~~~~~~~~~~~~~~~~~~~      |           |            
-  ;;                      |               |           |
-  ;; ---------------------------------------------------------------
-  ;; < MULTI-VALUE VARIABLE !! >                                      
-  ;; https://hacks.mozilla.org/2019/11/multi-value-all-the-wasm/      
-  ;;                                                                  
-  ;; +                                                                
-  ;; INDEX IS DEFINED < PARAMETERS + LOCAL VARIABLES > 
-  ;; https://github.com/WebAssembly/design/issues/1037
 
   (func $getSpriteImg (type 1) (param $pArrPix i32) (param $srcWidth i32) (param $srcHeight i32) (param $tarWidth i32) (param $tarHeight i32) (param $tarIndex i32) (param $tarIndexAll i32) (param $resultArray i32) 
     ;;                                
